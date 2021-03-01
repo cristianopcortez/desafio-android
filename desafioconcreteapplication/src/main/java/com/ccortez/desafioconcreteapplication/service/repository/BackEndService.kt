@@ -18,7 +18,8 @@ interface BackEndService {
     fun repositories(): Call<Repositories>
 
     // https://api.github.com/repos/CyC2018/CS-Notes/pulls
-    @GET(HTTP_API_URL + "repos/{full_name}/pulls")
+//    @GET(HTTP_API_URL + "repos/{full_name}/pulls")
+    @GET("repos/{full_name}/pulls")
     fun getRepositoryPulls(@Path("full_name", encoded = true) id: String?): Call<List<PullRequest>?>?
 
     companion object {

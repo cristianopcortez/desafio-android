@@ -201,7 +201,7 @@ class RepositoryListFragmentTest {
 
         activityRule.launchActivity(Intent())
 
-        val expected = 0
+        val expected = 2
 
         Thread.sleep(5000);
 
@@ -231,7 +231,7 @@ class RepositoryListFragmentTest {
 
         activityRule.launchActivity(Intent())
 
-        val expected = 7
+        val expected = 2
 
         Thread.sleep(5000);
 
@@ -277,6 +277,7 @@ class RepositoryListFragmentTest {
             if (request.path == "/search/repositories?q=language:Java&sort=stars&page=1") {
 //                val fileName = "repos-yigit.json"
                 val fileName = "search.json"
+                System.out.println("------------- loaded: " + fileName)
                 try {
                     return MockResponse().setResponseCode(200)
                         .setBody(
@@ -287,7 +288,21 @@ class RepositoryListFragmentTest {
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
-            } else if (request.path == "https://api.github.com/repos/CyC2018/CS-Notes/pulls") {
+                // else if (request.path == "https://api.github.com/repos/CyC2018/CS-Notes/pulls") {
+            } else if (request.path == "/repos/CyC2018/CS-Notes/pulls") {
+                val fileName = "repos-yigit.json"
+                System.out.println("------------- loaded: " + fileName)
+                try {
+                    return MockResponse().setResponseCode(200)
+                        .setBody(
+//                            RestServiceTestHelper.getStringFromFile(context,
+//                            fileName)
+                            loadJSON("api-response/"+fileName)
+                        )
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            } else if (request.path == "/repos/anneslin/yigit/pulls") {
                 val fileName = "repos-yigit.json"
                 try {
                     return MockResponse().setResponseCode(200)
